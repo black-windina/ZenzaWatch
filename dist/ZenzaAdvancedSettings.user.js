@@ -924,6 +924,7 @@ const Config = (() => {
 		enableStoryboardBar: false, // シーンサーチ
 		videoInfoPanelTab: 'videoInfoTab',
 		fullscreenControlBarMode: 'auto', // 'always-show' 'always-hide'
+		hiddenHeader: false,  // (Re)のヘッダを隠すかどうか
 		enableFilter: true,
 		wordFilter: '',
 		wordRegFilter: '',
@@ -1037,6 +1038,7 @@ const Config = (() => {
 		DEFAULT_CONFIG.volume = 1.0;
 		DEFAULT_CONFIG.enableVideoSession = true;
 		DEFAULT_CONFIG['uaa.enable'] = false;
+		DEFAULT_CONFIG.hiddenHeader = false;
 	}
 	return DataStorage.create(
 		DEFAULT_CONFIG,

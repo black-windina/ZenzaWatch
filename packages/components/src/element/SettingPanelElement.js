@@ -172,7 +172,16 @@ const {SettingPanelElement} = (() => {
               <small>(当然ながらdアニメニコニコチャンネル加入が必要)</small>
           </label>
         </div>
-
+        
+        <div class="control">
+          <label>
+            <input type="checkbox" class="checkbox"
+              data-setting-name="hiddenHeader"
+              ?checked=${conf.hiddenHeader}>
+            ニコニコ動画のヘッダを隠す(リロード後に反映)
+          </label>
+        </div>
+        
         <div class="control">
           <label>
             <select class="menuScale" data-setting-name="menuScale" data-type="number">

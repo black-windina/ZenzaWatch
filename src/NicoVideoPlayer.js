@@ -27,6 +27,11 @@ class NicoVideoPlayer extends Emitter {
   initialize(params) {
     let conf = this._playerConfig = params.playerConfig;
 
+    //設定されている場合、ニコニコのヘッダを隠す
+    if(conf.props.hiddenHeader){
+      document.getElementById("CommonHeader").style.display = "none";
+    }
+
     this._fullscreenNode = params.fullscreenNode;
     this._state = params.playerState;
 
@@ -298,6 +303,8 @@ class NicoVideoPlayer extends Emitter {
   close() {
     this._videoPlayer.close();
     this._commentPlayer.close();
+    //終了時、割と問答無用でヘッダを表示させる
+    document.getElementById("CommonHeader").style.display = "block" ; //ヘッダ戻し
   }
   closeCommentPlayer() {
     this._commentPlayer.close();

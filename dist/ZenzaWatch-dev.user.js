@@ -795,6 +795,7 @@ const Config = (() => {
 		enableStoryboardBar: false, // シーンサーチ
 		videoInfoPanelTab: 'videoInfoTab',
 		fullscreenControlBarMode: 'auto', // 'always-show' 'always-hide'
+		hiddenHeader: false,  // (Re)のヘッダを隠すかどうか
 		enableFilter: true,
 		wordFilter: '',
 		wordRegFilter: '',
@@ -908,6 +909,7 @@ const Config = (() => {
 		DEFAULT_CONFIG.volume = 1.0;
 		DEFAULT_CONFIG.enableVideoSession = true;
 		DEFAULT_CONFIG['uaa.enable'] = false;
+		DEFAULT_CONFIG.hiddenHeader = false;
 	}
 	return DataStorage.create(
 		DEFAULT_CONFIG,
@@ -5607,6 +5609,14 @@ const {SettingPanelElement} = (() => {
 				</div>
 				<div class="control">
 					<label>
+						<input type="checkbox" class="checkbox"
+							data-setting-name="hiddenHeader"
+							?checked=${conf.hiddenHeader}>
+						ニコニコ動画のヘッダを隠す(リロード後に反映)
+					</label>
+				</div>
+				<div class="control">
+					<label>
 						<select class="menuScale" data-setting-name="menuScale" data-type="number">
 							<option value="0.8" ?selected=${conf.menuScale == 0.8}>0.8倍</option>
 							<option value="1"   ?selected=${conf.menuScale == 1}>標準</option>
@@ -9401,6 +9411,9 @@ class NicoVideoPlayer extends Emitter {
 	}
 	initialize(params) {
 		let conf = this._playerConfig = params.playerConfig;
+		if(conf.props.hiddenHeader){
+			document.getElementById("CommonHeader").style.display = "none";
+		}
 		this._fullscreenNode = params.fullscreenNode;
 		this._state = params.playerState;
 		this._state.onkey('videoInfo', this.setVideoInfo.bind(this));
@@ -9656,6 +9669,7 @@ class NicoVideoPlayer extends Emitter {
 	close() {
 		this._videoPlayer.close();
 		this._commentPlayer.close();
+		document.getElementById("CommonHeader").style.display = "block" ; //ヘッダ戻し
 	}
 	closeCommentPlayer() {
 		this._commentPlayer.close();

@@ -107,7 +107,7 @@ class SettingPanel extends Emitter {
       'wordFilter', 'userIdFilter', 'commandFilter',
       'loop','autoPlay','enableHeatMap',
       'autoFullScreen','enableStoryboard',
-      'loadLinkedChannelVideo'];
+      'loadLinkedChannelVideo','hiddenHeader'];
     if ([...changed.keys()].some(key => keys.includes(key))) {
       this.sync();
     }
@@ -493,6 +493,13 @@ SettingPanel.__tpl__ = (`
           <input type="checkbox" class="checkbox" data-setting-name="loadLinkedChannelVideo">
           無料期間の切れた動画はdアニメの映像を流す<br>
           <small>(当然ながらdアニメニコニコチャンネル加入が必要)</small>
+        </label>
+      </div>
+
+      <div class="hiddenHeader control toggle">
+        <label>
+          <input type="checkbox" class="checkbox" data-setting-name="hiddenHeader">
+          ニコニコ動画のヘッダを隠す(要Zenza再起動)
         </label>
       </div>
 
